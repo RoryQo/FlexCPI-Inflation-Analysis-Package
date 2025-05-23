@@ -13,19 +13,13 @@ authors = [
 license = {text = "MIT"}
 keywords = [
     "consumer price index",
-    "custom CPI baskets",
+    "price index construction",
     "inflation measurement",
     "empirical economics",
-    "economic indicators",
-    "relative importance weights",
+    "economic measurement tools",
     "cost-of-living analysis",
     "macroeconomic modeling",
     "BLS data integration",
-    "data-driven inflation models",
-    "economic measurement tools",
-    "price index construction",
-    "inflation decomposition",
-    "public data workflows",
     "economic statistics pipeline"
 ]
 classifiers = [
