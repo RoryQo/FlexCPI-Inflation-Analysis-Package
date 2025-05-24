@@ -6,5 +6,6 @@ from .toolkit import (
     compute_custom_cpi_index,
     plot_custom_cpi,
     assign_manual_weights,
-    compute_inflation_rate
+    compute_inflation_rate,
+    plot_inflation_comparison
 )
