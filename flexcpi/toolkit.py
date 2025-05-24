@@ -54,6 +54,31 @@ def keyword_search_cpi(full_catalog, keyword, area_filter=None, max_results=20):
 
 
 
+
+def auto_select_series(keywords, full_catalog, area_filter="U.S. city average", max_per_keyword=1):
+    """
+    Automatically selects series IDs from CPI catalog based on keyword matches.
+
+    Parameters:
+        keywords (list of str): List of item keywords to search for.
+        full_catalog (pd.DataFrame): The CPI full catalog loaded with `load_catalog_tables()`.
+        area_filter (str): Area filter for CPI data (default "U.S. city average").
+        max_per_keyword (int): Max number of series to return per keyword.
+
+    Returns:
+        list: Series IDs corresponding to matched keywords.
+    """
+    selected_series = []
+    for keyword in keywords:
+        matches = full_catalog[
+            full_catalog["item_name"].str.contains(keyword, case=False, na=False) &
+            full_catalog["area_name"].str.contains(area_filter, case=False, na=False)
+        ]
+        matches = matches[["series_id", "item_name", "area_name"]].drop_duplicates()
+        selected_series.extend(matches["series_id"].head(max_per_keyword).tolist())
+    return selected_series
+
+
 # === Matching ===
 
 
