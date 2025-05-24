@@ -225,6 +225,25 @@ flexcpi/
 
 ---
 
+
+### `plot_inflation_comparison(custom_df, compare_to_actual=False, actual_series_id="CUSR0000SA0", api_key=None, title="Custom vs Official YoY Inflation")`
+- **Inputs:**
+  - `custom_df` (DataFrame): A DataFrame with `date` and `yoy_inflation` columns (e.g. from `compute_inflation_rate()`).
+  - `compare_to_actual` (bool): Whether to plot official CPI YoY inflation alongside custom inflation.
+  - `actual_series_id` (str): BLS series ID for official CPI (default is "CUSR0000SA0" for All Items, U.S. city average).
+  - `api_key` (str): Your BLS API key. Required if `compare_to_actual=True`.
+  - `title` (str): Plot title.
+
+- **Outputs:**
+  - Displays a matplotlib line plot comparing custom and official YoY inflation.
+
+- **Description:**
+  This function creates a visual comparison between the custom year-over-year inflation index and the official BLS CPI inflation index, if enabled.
+
+
+
+---
+
 ## Usage Example
 
 ```python
