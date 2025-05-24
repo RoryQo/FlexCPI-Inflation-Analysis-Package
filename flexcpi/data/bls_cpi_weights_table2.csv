@@ -1,0 +1,29 @@
+category,cpi_u_weight,cpi_w_weight
+All items,1.0,1.0
+Commodities,0.36201,0.40085
+Commodities less food and beverages,0.21675,0.24126
+Nondurables less food and beverages,0.10701000000000001,0.12228
+"Nondurables less food, beverages, and apparel",0.08221,0.09477000000000001
+Durables,0.10974,0.11898
+Services,0.63799,0.59915
+Rent of shelter,0.35072000000000003,0.32783
+Transportation services,0.06305,0.06848
+Other services,0.10061,0.08986000000000001
+All items less food,0.86309,0.84834
+All items less shelter,0.6451699999999999,0.66814
+All items less medical care,0.91727,0.93054
+Commodities less food,0.22511,0.24919
+Nondurables less food,0.11535999999999999,0.13021000000000002
+Nondurables less food and apparel,0.09055999999999999,0.1027
+Nondurables,0.25227,0.28187999999999996
+Apparel less footwear,0.019030000000000002,0.02051
+Services less rent of shelter,0.28726,0.27131
+Services less medical care services,0.57052,0.54287
+Energy,0.06216,0.07786
+All items less energy,0.93784,0.92214
+All items less food and energy,0.80094,0.77048
+Commodities less food and energy commodities,0.19388000000000002,0.2075
+Energy commodities,0.031219999999999998,0.04169
+Services less energy services,0.60705,0.56298
+Domestically produced farm food,0.06795,0.07632
+Utilities and public transportation,0.07744,0.08434
