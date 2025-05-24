@@ -128,9 +128,9 @@ flexcpi/
 | `assign_manual_weights()` | Manually assign weights to selected CPI series |
 | `fetch_cpi_series_data()` | Fetch monthly CPI values from BLS API |
 | `compute_custom_cpi_index()` | Compute CPI index using matched or manual weights |
+| `compute_inflation_rate()` | Calculate year-over-year inflation from CPI index |
 | `fetch_actual_cpi_series()` | Fetch official CPI series from BLS for comparison |
 | `plot_custom_cpi()` | Plot custom CPI and optionally official CPI |
-
 
 > **Important:**  
 > Before using most functions in `flexcpi`, you must first load the necessary data tables:
