@@ -3,26 +3,20 @@ Python package for building and analyzing custom Consumer Price Indexes (CPI). F
 
 ```
 flexcpi/
-├── flexcpi/                    # Core package source
-│   ├── __init__.py
-│   ├── calculator.py           # Main CPI computation engine
-│   ├── baskets.py              # Predefined and user-defined basket utilities
-│   ├── data_loader.py          # Functions to load price data from local/API
-│   ├── visualizer.py           # Plotting utilities for CPI trends
-│   └── utils.py                # Helpers: deflators, weight normalization, etc.
 │
-├── examples/                   # Jupyter notebooks or scripts
-│   └── example_custom_cpi.ipynb
+├── flexcpi/                    
+│   ├── __init__.py             
+│   ├── toolkit.py               
+│   └── data/                    
+│       ├── cu.series.txt
+│       ├── cu.item.txt
+│       ├── cu.area.txt
+│       ├── bls_cpi_weights_table1.csv
+│       └── bls_cpi_weights_table2.csv
 │
-├── tests/                      # Unit and integration tests
-│   ├── test_calculator.py
-│   └── test_baskets.py
-│
-├── pyproject.toml              # Package metadata & build system
-├── README.md                   # Project overview and usage instructions
-├── LICENSE                     # Licensing file (e.g., MIT)
-├── .gitignore
-└── .github/                    # GitHub Actions/issue templates (optional)
-    └── workflows/
-        └── test.yml           # CI pipeline (e.g., pytest on push)
+├── pyproject.toml              
+├── README.md                 
+├── LICENSE                    
+└── MANIFEST.in                 
+
 ```
