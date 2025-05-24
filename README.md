@@ -131,6 +131,7 @@ flexcpi/
 | `compute_inflation_rate()` | Calculate year-over-year inflation from CPI index |
 | `fetch_actual_cpi_series()` | Fetch official CPI series from BLS for comparison |
 | `plot_custom_cpi()` | Plot custom CPI and optionally official CPI |
+| `plot_inflation_comparison()` | Compare custom YoY inflation to official CPI inflation |
 
 > **Important:**  
 > Before using most functions in `flexcpi`, you must first load the necessary data tables:
@@ -143,7 +144,9 @@ flexcpi/
 
 ### `load_catalog_tables()`
 - **Inputs:** None
+
 - **Outputs:** `DataFrame` with merged BLS catalog (series, item, area)
+
 - **Description:** Merges CPI series metadata into one DataFrame.
   - **Necessary** to load to use following functions (reference requirements for details)
 
@@ -151,7 +154,9 @@ flexcpi/
 
 ### `load_weight_tables()`
 - **Inputs:** None
+
 - **Outputs:** Two `DataFrame`s: Table 1 and Table 2 weights.
+
 - **Description:** Loads and cleans official relative importance weights.
   - **Necessary** to load to use following functions (reference requirements for details)
 
@@ -160,14 +165,18 @@ flexcpi/
 
 ### `keyword_search_cpi(full_catalog, keyword, area_filter=None, max_results=20)`
 - **Inputs:** Catalog DataFrame, search keyword, area filter (optional), result limit
+
 - **Outputs:** Filtered `DataFrame` with series_id, item_name, and area_name
+
 - **Description:** Finds matching series from the catalog based on keyword.
 
 ---
 
 ### `match_series_ids_to_weights(series_ids, full_catalog, weights_df, use='cpi_u_weight', cutoff=0.7)`
 - **Inputs:** Series ID list, catalog, weights table, weight type, match cutoff
+
 - **Outputs:** `DataFrame` with series_id, item_name, matched_category, weight, normalized_weight
+
 - **Description:** Matches each series to its category and assigns normalized weights.
 
 ---
@@ -176,8 +185,10 @@ flexcpi/
 - **Inputs:**  
   - `series_ids` (list): List of CPI series IDs  
   - `weights_dict` (dict): Dictionary of user-defined weights keyed by series ID  
+
 - **Outputs:**  
   - `DataFrame` with columns: `series_id`, `raw_weight`, and `normalized_weight`  
+
 - **Description:**  
   Allows users to manually specify weights for each CPI series in their basket.  
   The output can be used directly with `compute_custom_cpi_index()`.
@@ -185,22 +196,37 @@ flexcpi/
 ---
 
 ### `fetch_cpi_series_data(series_ids, start_year=2020, end_year=2025, api_key=None)`
-- **Inputs:** Series ID list, year range, optional API key
+- **Inputs:**
+  - `Series ID list`
+  - `year range`
+  - `API key`
+
 - **Outputs:** `DataFrame` with year, month, value, series_id
+
 - **Description:** Retrieves time series CPI values from the BLS API.
 
 ---
 
 ### `compute_custom_cpi_index(matched_df, start_year=2020, end_year=2025, api_key=None)`
-- **Inputs:** Matched DataFrame, year range, API key
+- **Inputs:**
+  - `Matched DataFrame`
+  - `year range`
+  - `API key`
+
 - **Outputs:** `DataFrame` with weighted CPI values over time
+
 - **Description:** Computes index using weights to form a custom CPI.
 
 ---
 
 ### `fetch_actual_cpi_series(series_id, start_year, end_year, api_key)`
-- **Inputs:** CPI series ID, year range, BLS API key
+- **Inputs:**
+  - `CPI series ID`
+  - `year range`
+  - `BLS API key`
+ 
 - **Outputs:** Official CPI `DataFrame` (date and value)
+
 - **Description:** Retrieves a standard CPI series from BLS.
 
 ---
@@ -219,8 +245,15 @@ flexcpi/
 ---
 
 ### `plot_custom_cpi(custom_cpi_df, compare_to_actual=False, api_key=None, actual_series_id='CUSR0000SA0', title='Custom CPI Index Over Time')`
-- **Inputs:** Computed custom CPI DataFrame, compare flag, optional API key, actual series ID, plot title
+- **Inputs:**
+  - `Computed custom CPI DataFrame`
+  - `compare flag`
+  - `optional API key`
+  - `actual series ID`
+  - `plot title`
+
 - **Outputs:** Matplotlib plot
+
 - **Description:** Visualizes the custom CPI trend and optionally overlays official CPI.
 
 ---
