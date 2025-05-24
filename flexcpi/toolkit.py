@@ -26,6 +26,32 @@ def load_weight_tables():
         table["cpi_u_weight"] = table["cpi_u_weight"].astype(float)
     return table1, table2
 
+# === Searching ===
+
+def keyword_search_cpi(full_catalog, keyword, area_filter=None, max_results=20):
+    """
+    Search CPI catalog for a keyword in item or area name, with optional area filtering.
+
+    Parameters:
+        full_catalog (pd.DataFrame): Merged catalog of CPI series, items, and areas.
+        keyword (str): Search term (case-insensitive).
+        area_filter (str, optional): Only return results from this area (e.g., "U.S. city average").
+        max_results (int): Max number of results to return.
+
+    Returns:
+        pd.DataFrame: Matching series with readable item and area names.
+    """
+    mask = full_catalog["item_name"].str.contains(keyword, case=False, na=False) | \
+           full_catalog["area_name"].str.contains(keyword, case=False, na=False)
+
+    if area_filter:
+        area_mask = full_catalog["area_name"].str.contains(area_filter, case=False, na=False)
+        mask &= area_mask
+
+    return full_catalog.loc[mask, ["series_id", "item_name", "area_name"]].drop_duplicates().head(max_results)
+
+
+
 # === Matching ===
 
 def match_series_ids_to_weights(series_ids, full_catalog, weights_df, use="cpi_u_weight", cutoff=0.7):
