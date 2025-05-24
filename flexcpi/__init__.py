@@ -4,5 +4,6 @@ from .toolkit import (
     match_series_ids_to_weights,
     fetch_cpi_series_data,
     compute_custom_cpi_index,
-    plot_custom_cpi
+    plot_custom_cpi,
+    assign_manual_weights
 )
