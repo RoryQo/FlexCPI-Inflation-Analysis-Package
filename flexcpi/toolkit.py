@@ -3,6 +3,8 @@ import requests
 import matplotlib.pyplot as plt
 from importlib.resources import files
 from difflib import get_close_matches
+import difflib
+
 
 # === Data Loading ===
 
@@ -54,41 +56,69 @@ def keyword_search_cpi(full_catalog, keyword, area_filter=None, max_results=20):
 
 # === Matching ===
 
+
 def match_series_ids_to_weights(series_ids, full_catalog, weights_df, use="cpi_u_weight", cutoff=0.7):
+    """
+    Match series IDs to CPI weight categories using substring and fuzzy matching.
+
+    Parameters:
+        series_ids (list): List of CPI series IDs (e.g. CUSR0000SAS2RS).
+        full_catalog (DataFrame): CPI catalog merged with item and area descriptions.
+        weights_df (DataFrame): Cleaned weight table with columns: 'category', 'cpi_u_weight', 'cpi_w_weight'.
+        use (str): Which weight column to use ('cpi_u_weight' or 'cpi_w_weight').
+        cutoff (float): Fuzzy match cutoff (between 0 and 1).
+
+    Returns:
+        DataFrame: Matches with raw and normalized weights.
+    """
+    # Clean inputs
     full_catalog["series_id"] = full_catalog["series_id"].astype(str).str.strip()
     full_catalog["item_name"] = full_catalog["item_name"].astype(str).str.strip().str.lower()
     weights_df["category"] = weights_df["category"].astype(str).str.strip().str.lower()
 
     results = []
+
     for sid in series_ids:
         row = full_catalog[full_catalog["series_id"] == sid]
         if row.empty:
             print(f"[SKIP] Series ID not found in catalog: {sid}")
             continue
 
-        item_name = row["item_name"].values[0]
+        item_name = row["item_name"].values[0].lower()
+
+        # Step 1: Substring match
         substring_matches = weights_df[weights_df["category"].apply(lambda x: x in item_name or item_name in x)]
         if not substring_matches.empty:
             best_match = substring_matches.iloc[0]
+            matched_category = best_match["category"]
             weight = best_match[use]
         else:
-            match = get_close_matches(item_name, weights_df["category"], n=1, cutoff=cutoff)
-            if not match:
+            # Step 2: Fuzzy match fallback
+            match = difflib.get_close_matches(item_name, weights_df["category"], n=1, cutoff=cutoff)
+            if match:
+                matched_category = match[0]
+                weight = weights_df.loc[weights_df["category"] == matched_category, use].values[0]
+            else:
                 print(f"[MISS] No match for: {item_name.title()} (Series ID: {sid})")
                 continue
-            weight = weights_df.loc[weights_df["category"] == match[0], use].values[0]
 
         results.append({
             "series_id": sid,
             "item_name": item_name,
-            "matched_category": match[0] if not substring_matches.empty else best_match["category"],
+            "matched_category": matched_category,
             "weight": weight
         })
 
+    # Build results DataFrame
     df = pd.DataFrame(results)
     total = df["weight"].sum()
-    df["normalized_weight"] = df["weight"] / total if total > 0 else 0
+
+    if total == 0:
+        raise ValueError("Total weight is zero. Check fuzzy match cutoff or input series.")
+
+    df["normalized_weight"] = df["weight"] / total
     return df
+
 
 # === Fetch CPI Series Data ===
 
