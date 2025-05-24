@@ -8,5 +8,6 @@ from .toolkit import (
     assign_manual_weights,
     compute_inflation_rate,
     plot_inflation_comparison,
-    auto_select_series
+    auto_select_series,
+    export_cpi_data
 )
