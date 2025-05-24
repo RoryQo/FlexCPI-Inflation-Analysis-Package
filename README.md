@@ -125,8 +125,9 @@ flexcpi/
 | `load_weight_tables()` | Load cleaned BLS relative importance weight tables |
 | `keyword_search_cpi()` | Search CPI catalog for keyword matches |
 | `match_series_ids_to_weights()` | Fuzzy match series IDs to weighted categories |
+| `assign_manual_weights()` | Manually assign weights to selected CPI series |
 | `fetch_cpi_series_data()` | Fetch monthly CPI values from BLS API |
-| `compute_custom_cpi_index()` | Compute CPI index using matched weights |
+| `compute_custom_cpi_index()` | Compute CPI index using matched or manual weights |
 | `fetch_actual_cpi_series()` | Fetch official CPI series from BLS for comparison |
 | `plot_custom_cpi()` | Plot custom CPI and optionally official CPI |
 
@@ -168,6 +169,18 @@ flexcpi/
 - **Inputs:** Series ID list, catalog, weights table, weight type, match cutoff
 - **Outputs:** `DataFrame` with series_id, item_name, matched_category, weight, normalized_weight
 - **Description:** Matches each series to its category and assigns normalized weights.
+
+---
+
+### `assign_manual_weights(series_ids, weights_dict)`
+- **Inputs:**  
+  - `series_ids` (list): List of CPI series IDs  
+  - `weights_dict` (dict): Dictionary of user-defined weights keyed by series ID  
+- **Outputs:**  
+  - `DataFrame` with columns: `series_id`, `raw_weight`, and `normalized_weight`  
+- **Description:**  
+  Allows users to manually specify weights for each CPI series in their basket.  
+  The output can be used directly with `compute_custom_cpi_index()`.
 
 ---
 
