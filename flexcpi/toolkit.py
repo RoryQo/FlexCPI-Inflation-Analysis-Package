@@ -119,6 +119,43 @@ def match_series_ids_to_weights(series_ids, full_catalog, weights_df, use="cpi_u
     df["normalized_weight"] = df["weight"] / total
     return df
 
+# === Fetch CPI Series Data ===
+
+def assign_manual_weights(series_ids, weights_dict):
+    """
+    Assign user-defined weights to a list of CPI series.
+
+    Parameters:
+        series_ids (list): List of BLS series IDs (e.g., ["CUSR0000SAS2RS", "CUSR0000SA0L1"]).
+        weights_dict (dict): Dictionary mapping series_id -> raw weight value 
+                             (e.g., {"CUSR0000SAS2RS": 0.4, "CUSR0000SA0L1": 0.6}).
+
+    Returns:
+        pd.DataFrame: DataFrame with series_id, raw weight, and normalized weight.
+
+    Raises:
+        ValueError: If any series_id is not in the provided weights_dict or if weights sum to zero.
+    """
+    import pandas as pd
+
+    # Validate input
+    missing = [sid for sid in series_ids if sid not in weights_dict]
+    if missing:
+        raise ValueError(f"The following series_ids are missing weights: {missing}")
+
+    # Build DataFrame
+    df = pd.DataFrame({
+        "series_id": series_ids,
+        "raw_weight": [weights_dict[sid] for sid in series_ids]
+    })
+
+    total = df["raw_weight"].sum()
+    if total == 0:
+        raise ValueError("Total weight must be greater than zero.")
+
+    df["normalized_weight"] = df["raw_weight"] / total
+    return df
+
 
 # === Fetch CPI Series Data ===
 
