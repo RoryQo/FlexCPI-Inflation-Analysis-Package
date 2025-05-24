@@ -1,11 +1,4 @@
 
-<h1 align="center">FlexCPI: Custom Consumer Price Index Toolkit</h1>    
-  
-<p align="center"> 
-  <a href="https://test.pypi.org/project/flexcpi/"> 
-    <img src="https://img.shields.io/badge/test%20PyPI-flexcpi-blue" alt="Test PyPI">
-  </a>
-</p>
 
 <p align="center">
   <em>FlexCPI is under active development for inflation analysis and customized economic indexing.</em>
