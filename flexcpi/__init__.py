@@ -9,5 +9,6 @@ from .toolkit import (
     compute_inflation_rate,
     plot_inflation_comparison,
     auto_select_series,
-    export_cpi_data
+    export_cpi_data,
+    forecast_custom_cpi
 )
