@@ -232,3 +232,19 @@ def plot_custom_cpi(custom_cpi_df, compare_to_actual=False, api_key=None, actual
     plt.grid(True)
     plt.tight_layout()
     plt.show()
+
+# === Inflation ===
+
+def compute_inflation_rate(cpi_df):
+    """
+    Compute year-over-year (YoY) inflation rates from a custom CPI index DataFrame.
+
+    Parameters:
+        cpi_df (pd.DataFrame): Must include columns ['date', 'custom_cpi_index']
+
+    Returns:
+        pd.DataFrame: Original DataFrame with added 'yoy_inflation' column (in %)
+    """
+    cpi_df = cpi_df.sort_values("date").copy()
+    cpi_df["yoy_inflation"] = cpi_df["custom_cpi_index"].pct_change(periods=12) * 100
+    return cpi_df
