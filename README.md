@@ -1,5 +1,5 @@
 
-<h1 align="center">FlexCPI: Custom Consumer Price Index Toolkit</h1>   
+<h1 align="center">FlexCPI: Custom Consumer Price Index Toolkit</h1>    
   
 <p align="center">
   <a href="https://test.pypi.org/project/flexcpi/">
