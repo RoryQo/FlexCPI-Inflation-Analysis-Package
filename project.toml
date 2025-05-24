@@ -1,42 +1,15 @@
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "flexcpi"
 version = "0.1.0"
-description = "A customizable CPI basket tool for empirical inflation measurements using BLS data."
+description = "Build and analyze custom CPI baskets using BLS data"
+authors = [{name = "Rory G Quinlan"}]
 readme = "README.md"
-authors = [
-    { name = "Rory G. Quinlan" }
-]
-license = {text = "MIT"}
-keywords = [
-    "consumer price index",
-    "price index construction",
-    "inflation measurement",
-    "empirical economics",
-    "economic measurement tools",
-    "cost-of-living analysis",
-    "macroeconomic modeling",
-    "BLS data integration",
-    "economic statistics pipeline"
-]
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Intended Audience :: Science/Research",
-    "Topic :: Scientific/Engineering :: Information Analysis",
-    "Topic :: Scientific/Engineering :: Economics"
-]
 requires-python = ">=3.8"
-dependencies = [
-    "pandas",
-    "requests",
-    "openpyxl"  # For loading downloaded Excel BLS weights
-]
+dependencies = ["pandas", "matplotlib", "requests"]
 
-[project.urls]
-Homepage = "https://github.com/RoryQo/FlexCPI"
-Repository = "https://github.com/RoryQo/FlexCPI"
-Issues = "https://github.com/RoryQo/FlexCPI/issues"
+[tool.setuptools.package-data]
+"flexcpi.data" = ["*.csv", "*.txt"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
