@@ -7,5 +7,6 @@ from .toolkit import (
     plot_custom_cpi,
     assign_manual_weights,
     compute_inflation_rate,
-    plot_inflation_comparison
+    plot_inflation_comparison,
+    auto_select_series
 )
