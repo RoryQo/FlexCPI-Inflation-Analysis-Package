@@ -308,3 +308,25 @@ def compute_inflation_rate(cpi_df):
     cpi_df = cpi_df.sort_values("date").copy()
     cpi_df["yoy_inflation"] = cpi_df["custom_cpi_index"].pct_change(periods=12) * 100
     return cpi_df
+
+
+# === Export ===
+
+def export_cpi_data(index_df, basket_df, out_dir=".", base_name="custom_cpi"):
+    """
+    Save custom CPI index and basket definition to CSV.
+
+    Parameters:
+        index_df (DataFrame): Output from compute_custom_cpi_index().
+        basket_df (DataFrame): Output from match_series_ids_to_weights().
+        out_dir (str): Folder to save into.
+        base_name (str): File name prefix.
+    """
+    import os
+    index_path = os.path.join(out_dir, f"{base_name}_index.csv")
+    basket_path = os.path.join(out_dir, f"{base_name}_basket.csv")
+    index_df.to_csv(index_path, index=False)
+    basket_df.to_csv(basket_path, index=False)
+    print(f"Saved index to {index_path}")
+    print(f"Saved basket to {basket_path}")
+
