@@ -197,10 +197,24 @@ flexcpi/
 - **Description:** Computes index using weights to form a custom CPI.
 
 ---
+
 ### `fetch_actual_cpi_series(series_id, start_year, end_year, api_key)`
 - **Inputs:** CPI series ID, year range, BLS API key
 - **Outputs:** Official CPI `DataFrame` (date and value)
 - **Description:** Retrieves a standard CPI series from BLS.
+
+---
+
+### `compute_inflation_rate(cpi_df)`
+- **Inputs:**  
+  - `cpi_df` (DataFrame): A DataFrame containing at least `["date", "custom_cpi_index"]` columns.
+
+- **Outputs:**  
+  - `DataFrame`: The input DataFrame with an additional `yoy_inflation` column (year-over-year % change).
+
+- **Description:**  
+  Calculates the year-over-year inflation rate for each month using the custom CPI index.
+
 
 ---
 
