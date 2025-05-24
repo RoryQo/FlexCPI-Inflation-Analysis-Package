@@ -233,6 +233,41 @@ def plot_custom_cpi(custom_cpi_df, compare_to_actual=False, api_key=None, actual
     plt.tight_layout()
     plt.show()
 
+
+# === Plotting infl ===
+
+import matplotlib.pyplot as plt
+
+def plot_inflation_comparison(custom_df, compare_to_actual=False, actual_series_id="CUSR0000SA0", api_key=None, title="Custom vs Official YoY Inflation"):
+    """
+    Plot YoY inflation from custom CPI, optionally comparing to official CPI series.
+
+    Parameters:
+        custom_df (pd.DataFrame): Must contain 'date' and 'yoy_inflation' columns.
+        compare_to_actual (bool): If True, also fetch and plot official CPI inflation.
+        actual_series_id (str): BLS series ID for the official CPI (default: All items).
+        api_key (str): BLS API key, required if compare_to_actual is True.
+        title (str): Title for the plot.
+    """
+    plt.figure(figsize=(10, 6))
+    plt.plot(custom_df["date"], custom_df["yoy_inflation"], label="Custom YoY Inflation", linewidth=2)
+
+    if compare_to_actual:
+        actual_df = fetch_actual_cpi_series(actual_series_id, 
+                                            start_year=custom_df["date"].dt.year.min(), 
+                                            end_year=custom_df["date"].dt.year.max(), 
+                                            api_key=api_key)
+        actual_df["yoy_inflation"] = actual_df["value"].pct_change(periods=12) * 100
+        plt.plot(actual_df["date"], actual_df["yoy_inflation"], label="Official YoY Inflation", linestyle='--')
+
+    plt.title(title)
+    plt.xlabel("Date")
+    plt.ylabel("Year-over-Year Inflation (%)")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
 # === Inflation ===
 
 def compute_inflation_rate(cpi_df):
