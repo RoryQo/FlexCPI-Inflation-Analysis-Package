@@ -133,6 +133,7 @@ flexcpi/
 | `fetch_actual_cpi_series()` | Fetch official CPI series from BLS for comparison |
 | `plot_custom_cpi()` | Plot custom CPI and optionally official CPI |
 | `plot_inflation_comparison()` | Compare custom YoY inflation to official CPI inflation |
+| `export_cpi_data()` | Export custom CPI index and weights to CSV files |
 
 > **Important:**  
 > Before using most functions in `flexcpi`, you must first load the necessary data tables:
@@ -292,6 +293,26 @@ flexcpi/
 
 - **Description:**
   This function creates a visual comparison between the custom year-over-year inflation index and the official BLS CPI inflation index, if enabled.
+
+---
+
+### `export_cpi_data(index_df=custom_index, basket_df=matched_df, out_dir="outputs", base_name="Name")`
+
+**Description:**  
+Exports the custom CPI index and basket definition to CSV files for external use or archiving.
+
+**Inputs:**
+- `index_df` (`pandas.DataFrame`): Output from `compute_custom_cpi_index()`. Must include `date` and `custom_cpi_index`.
+- `basket_df` (`pandas.DataFrame`): Output from `match_series_ids_to_weights()` or `assign_manual_weights()`.
+- `out_dir` (`str`, optional): Folder path to save the files. Defaults to the current directory `"."`.
+- `base_name` (`str`, optional): Prefix for output filenames. Defaults to `"custom_cpi"`.
+
+**Outputs:**
+- Saves two CSV files:
+  - `<base_name>_index.csv`: CPI index values with dates.
+  - `<base_name>_basket.csv`: Series IDs, item names, matched categories, raw and normalized weights.
+
+
 
 
 
