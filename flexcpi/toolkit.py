@@ -330,3 +330,57 @@ def export_cpi_data(index_df, basket_df, out_dir=".", base_name="custom_cpi"):
     print(f"Saved index to {index_path}")
     print(f"Saved basket to {basket_path}")
 
+# === Forescast ===
+
+from statsmodels.tsa.arima.model import ARIMA
+import warnings
+
+def forecast_custom_cpi(custom_cpi_df, forecast_periods=12, order=(1,1,1), plot=True):
+    """
+    Fit an ARIMA model to the custom CPI index and forecast future values.
+
+    Parameters:
+        custom_cpi_df (pd.DataFrame): Output from compute_custom_cpi_index(), must include 'date' and 'custom_cpi_index'.
+        forecast_periods (int): Number of months to forecast into the future.
+        order (tuple): ARIMA order (p,d,q).
+        plot (bool): Whether to plot the forecast.
+
+    Returns:
+        pd.DataFrame: DataFrame with historical and forecasted CPI index.
+    """
+    if "custom_cpi_index" not in custom_cpi_df.columns:
+        raise ValueError("custom_cpi_df must contain 'custom_cpi_index' column.")
+
+    ts = custom_cpi_df.set_index("date")["custom_cpi_index"]
+    ts = ts.asfreq("MS")
+
+    # Fit ARIMA model
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        model = ARIMA(ts, order=order)
+        fitted_model = model.fit()
+
+    forecast_index = pd.date_range(start=ts.index[-1] + pd.DateOffset(months=1), periods=forecast_periods, freq="MS")
+    forecast_values = fitted_model.forecast(steps=forecast_periods)
+
+    forecast_df = pd.DataFrame({
+        "date": forecast_index,
+        "custom_cpi_index": forecast_values
+    })
+
+    combined_df = pd.concat([custom_cpi_df[["date", "custom_cpi_index"]], forecast_df], ignore_index=True)
+
+    if plot:
+        plt.figure(figsize=(10, 5))
+        plt.plot(combined_df["date"], combined_df["custom_cpi_index"], label="Custom CPI (Actual + Forecast)", color="blue")
+        plt.axvline(x=custom_cpi_df["date"].max(), color="gray", linestyle="--", label="Forecast Start")
+        plt.title("Forecasted Custom CPI Index")
+        plt.xlabel("Date")
+        plt.ylabel("CPI Index")
+        plt.legend()
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
+
+    return combined_df
+
