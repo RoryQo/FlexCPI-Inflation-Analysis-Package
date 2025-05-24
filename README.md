@@ -124,6 +124,7 @@ flexcpi/
 | `load_catalog_tables()` | Load CPI metadata: series, items, and areas |
 | `load_weight_tables()` | Load cleaned BLS relative importance weight tables |
 | `keyword_search_cpi()` | Search CPI catalog for keyword matches |
+| `auto_select_series()` | Automatically select series IDs by keyword from catalog |
 | `match_series_ids_to_weights()` | Fuzzy match series IDs to weighted categories |
 | `assign_manual_weights()` | Manually assign weights to selected CPI series |
 | `fetch_cpi_series_data()` | Fetch monthly CPI values from BLS API |
@@ -169,6 +170,25 @@ flexcpi/
 - **Outputs:** Filtered `DataFrame` with series_id, item_name, and area_name
 
 - **Description:** Finds matching series from the catalog based on keyword.
+
+---
+### `auto_select_series(keywords, full_catalog, area_filter="U.S. city average", max_per_keyword=1)`
+
+- **Inputs:**
+  - `keywords` (list of str): Keywords to search in the CPI item names.
+  - `full_catalog` (DataFrame): Loaded CPI catalog from `load_catalog_tables()`.
+  - `area_filter` (str): Optional filter for CPI region (default "U.S. city average").
+  - `max_per_keyword` (int): Max number of series returned per keyword.
+
+- **Outputs:**
+  - `list`: A list of matched CPI series IDs.
+
+- **Description:**
+  This function provides a simple way to automatically select relevant CPI series based on keyword searches. It filters by area and returns the most relevant series IDs.
+
+
+
+
 
 ---
 
