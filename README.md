@@ -134,6 +134,8 @@ flexcpi/
 | `plot_custom_cpi()` | Plot custom CPI and optionally official CPI |
 | `plot_inflation_comparison()` | Compare custom YoY inflation to official CPI inflation |
 | `export_cpi_data()` | Export custom CPI index and weights to CSV files |
+| `forecast_custom_cpi()` | Fit ARIMA model to custom CPI index and forecast future values |
+
 
 > **Important:**  
 > Before using most functions in `flexcpi`, you must first load the necessary data tables:
@@ -313,7 +315,26 @@ Exports the custom CPI index and basket definition to CSV files for external use
   - `<base_name>_basket.csv`: Series IDs, item names, matched categories, raw and normalized weights.
 
 
+---
 
+### `forecast_custom_cpi(custom_cpi_df, forecast_periods=12, order=(1,1,1), plot=True)`
+
+**Description:**  
+Forecasts future values of a computed custom CPI index using ARIMA modeling.
+
+**Inputs:**
+- `custom_cpi_df` (`pd.DataFrame`): Output from `compute_custom_cpi_index()` containing `"date"` and `"custom_cpi_index"` columns.
+- `forecast_periods` (`int`): Number of months to forecast (default is 12).
+- `order` (`tuple`): ARIMA model order in the form `(p, d, q)` (default is `(1, 1, 1)`).
+- `plot` (`bool`): Whether to plot the forecasted index alongside historical data (default is `True`).
+
+**Output:**
+- `pd.DataFrame`: DataFrame containing the original custom CPI index plus forecasted values.
+
+**Behavior:**
+- Fits an ARIMA model using the `statsmodels` library to the provided CPI index.
+- Automatically extends the time series into the future and appends the forecasted CPI values.
+- Optionally generates a line plot showing historical and projected CPI index.
 
 
 ---
