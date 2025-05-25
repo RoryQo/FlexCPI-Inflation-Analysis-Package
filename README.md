@@ -19,18 +19,23 @@
     <td>2. <a href="#installation">Installation</a></td>
   </tr>
   <tr>
-    <td>3. <a href="#package-structure">Package Structure</a></td>
-    <td>4. <a href="#core-functions">Core Functions</a></td>
+    <td>3. <a href="#requirements">Requirements</a></td>
+    <td>4. <a href="#bls-api-key-requirement">BLS API Key Requirement</a></td>
   </tr>
   <tr>
-    <td>5. <a href="#usage-example">Usage Example</a></td>
-    <td>6. <a href="#requirements">Requirements</a></td>
+    <td>5. <a href="#package-structure">Package Structure</a></td>
+    <td>6. <a href="#core-functions">Core Functions</a></td>
   </tr>
   <tr>
-    <td>7. <a href="#license">License</a></td>
-    <td>8. <a href="#contributing">Contributing</a></td>
+    <td>7. <a href="#function-inputsoutputs">Function Inputs/Outputs</a></td>
+    <td>8. <a href="#usage-example">Usage Example</a></td>
+  </tr>
+  <tr>
+    <td>9. <a href="#license">License</a></td>
+    <td>10. <a href="#contributing">Contributing</a></td>
   </tr>
 </table>
+
 
 ---
 
@@ -46,6 +51,37 @@
 This toolkit is ideal for economic researchers, policy analysts, and students of macroeconomics who want flexible, reproducible CPI constructions.
 
 ---
+
+## Installation
+
+Install from **PyPI**:
+
+```bash
+pip install flexcpi
+```
+
+---
+## Requirements
+
+- `pandas`
+- `requests`
+- `matplotlib`
+- `statsmodels`
+
+  > **Important:**  
+> Before using most functions in `flexcpi`, you must first load the necessary data tables using the following functions:
+>
+> ```python
+> from flexcpi.toolkit import load_catalog_tables, load_weight_tables
+>
+> full_catalog = load_catalog_tables()
+> table1, table2 = load_weight_tables()
+> ```
+>
+> These data tables are required inputs for key operations like matching series to weights and computing custom CPI indexes.
+
+---
+
 
 ## BLS API Key Requirement
 
@@ -68,50 +104,39 @@ Pass the key to any function that supports the `api_key` parameter:
 custom_cpi_df = compute_custom_cpi_index(matched_df, start_year=2020, end_year=2025, api_key="your_api_key")
 ```
 
----
 
-## Installation
 
-Install from **PyPI**:
-
-```bash
-pip install flexcpi
-```
 
 ---
 
-## Requirements
 
-- `pandas`
-- `requests`
-- `matplotlib`
-
-  > **Important:**  
-> Before using most functions in `flexcpi`, you must first load the necessary data tables using the following functions:
->
-> ```python
-> from flexcpi.toolkit import load_catalog_tables, load_weight_tables
->
-> full_catalog = load_catalog_tables()
-> table1, table2 = load_weight_tables()
-> ```
->
-> These data tables are required inputs for key operations like matching series to weights and computing custom CPI indexes.
-
----
 
 ## Package Structure
 
 ```
-flexcpi/
-├── __init__.py
-├── toolkit.py
-└── data/
-    ├── cu.series.txt
-    ├── cu.item.txt
-    ├── cu.area.txt
-    ├── bls_cpi_weights_table1.csv
-    └── bls_cpi_weights_table2.csv
+FlexCPI/
+│
+├── flexcpi/                  
+│   ├── __init__.py
+│   ├── toolkit.py
+│   └── data/
+│       ├── cu.series.txt
+│       ├── cu.item.txt
+│       ├── cu.area.txt
+│       ├── bls_cpi_weights_table1.csv
+│       └── bls_cpi_weights_table2.csv
+│
+├── examples/                 
+│   └── usage_examples.ipynb
+│
+├── .github/                
+│   └── workflows/
+│       └── publish.yml
+│
+├── pyproject.toml          
+├── README.md
+└── LICENSE
+
 ```
 
 ---
@@ -340,6 +365,19 @@ Forecasts future values of a computed custom CPI index using ARIMA modeling.
 
 ## Usage Example
 
+
+An example Jupyter notebook demonstrating all core functions of the `flexcpi` package is available in the repository:
+
+[![Usage Notebook](https://img.shields.io/badge/Usage%20Notebook-lightgrey?logo=jupyter&logoColor=orange&labelColor=black)](https://github.com/RoryQo/FlexCPI/blob/main/examples/usage_examples.ipynb)
+
+This notebook walks through:
+- Loading catalog and weight tables
+- Defining a custom CPI basket
+- Computing weighted inflation
+- Visualizing inflation trends
+
+
+**Sample Snippet**
 ```python
 from flexcpi import (
     load_catalog_tables, load_weight_tables,
