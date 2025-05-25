@@ -1,4 +1,10 @@
+<h1 align="center">FlexCPI: A Python Package for Custom CPI Analysis</h1>
 
+<p align="center">
+  <a href="https://pypi.org/project/flexcpi/">
+    <img src="https://img.shields.io/pypi/v/flexcpi?label=PyPI&logo=pypi&logoColor=white&labelColor=grey&color=blue" alt="PyPI package">
+  </a>
+</p>
 
 <p align="center">
   <em>FlexCPI is under active development for inflation analysis and customized economic indexing.</em>
@@ -66,10 +72,10 @@ custom_cpi_df = compute_custom_cpi_index(matched_df, start_year=2020, end_year=2
 
 ## Installation
 
-Install from **Test PyPI**:
+Install from **PyPI**:
 
 ```bash
-pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple flexcpi
+pip install flexcpi
 ```
 
 ---
