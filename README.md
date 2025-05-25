@@ -2,7 +2,7 @@
  
 <p align="center">  
   <a href="https://pypi.org/project/flexcpi/">
-    <img src="https://img.shields.io/pypi/v/flexcpi?label=PyPI&logo=pypi&logoColor=white&labelColor=grey&color=blue" alt="PyPI package">
+    <img src="https://img.shields.io/pypi/v/flexcpi?label=PyPI&logo=pypi&logoColor=white&labelColor=grey&color=brightgreen" alt="PyPI package">
   </a>
 </p>
 
