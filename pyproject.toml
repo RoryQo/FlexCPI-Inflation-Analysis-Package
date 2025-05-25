@@ -1,6 +1,6 @@
 [project]
 name = "flexcpi"
-version = "0.1.0"
+version = "0.1.1"
 description = "Build and analyze custom CPI baskets using BLS data"
 authors = [{name = "Rory G Quinlan"}]
 readme = "README.md"
