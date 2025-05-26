@@ -386,24 +386,43 @@ def forecast_custom_cpi(custom_cpi_df, forecast_periods=12, order=(1,1,1), plot=
 
 # === student cpi ===
 
+import pandas as pd
+from .core import build_custom_cpi  # adjust if build_custom_cpi is in a different module
+
 def student_base_cpi(weights_version="table1", area_code="0000"):
     """
-    Returns a custom CPI for a typical student consumption basket.
+    Generate a custom CPI index for a typical student consumption basket.
 
     Parameters:
-    - weights_version: str, either "table1" (U.S. city average) or "table2" (regional)
-    - area_code: str, BLS area code (default is '0000' = U.S. city average)
+    ----------
+    weights_version : str, optional
+        Version of BLS weights to use. Options:
+        - "table1": U.S. city average (default)
+        - "table2": Regional weights
+    area_code : str, optional
+        BLS area code for geographic targeting. Default is "0000" (U.S. city average).
 
     Returns:
-    - pandas.DataFrame: Monthly CPI index values for the student basket
+    -------
+    pandas.DataFrame
+        Monthly CPI index for the student basket, indexed by date.
     """
-    # Define a simplified student basket by BLS item codes and assumed weights
+
+    # Define a representative student basket using BLS item codes
     student_basket = {
-        "SEAA": 0.25,  # Rent of primary residence
-        "SEFV": 0.15,  # Food away from home
-        "SEFC": 0.20,  # Food at home
-        "SETA": 0.10,  # Public transportation
-        "SS01": 0.10,  # Tuition, other school fees
-        "SS4501": 0.10,  # Personal computers
-        "SERA": 0.10,  # Apparel
+        "SEAA": 0.25,   # Rent of primary residence
+        "SEFV": 0.15,   # Food away from home
+        "SEFC": 0.20,   # Food at home
+        "SETA": 0.10,   # Public transportation
+        "SS01": 0.10,   # Tuition and school fees
+        "SS4501": 0.10, # Personal computers
+        "SERA": 0.10    # Apparel
     }
+
+    # Build the CPI series using the existing function
+    return build_custom_cpi(
+        basket=student_basket,
+        weights_version=weights_version,
+        area_code=area_code
+    )
+
