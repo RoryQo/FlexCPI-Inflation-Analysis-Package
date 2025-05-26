@@ -11,5 +11,8 @@ from .toolkit import (
     auto_select_series,
     export_cpi_data,
     forecast_custom_cpi,
-    student_base_cpi
+    student_base_cpi,
+    senior_base_cpi,
+    urban_low_income_cpi,
+    young_professional_cpi,
 )
