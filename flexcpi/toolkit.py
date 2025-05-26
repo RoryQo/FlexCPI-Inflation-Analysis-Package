@@ -384,7 +384,7 @@ def forecast_custom_cpi(custom_cpi_df, forecast_periods=12, order=(1,1,1), plot=
 
     return combined_df
 
-# === student cpi ===
+# === predefined baskets ===
 
 import pandas as pd
 from .core import build_custom_cpi  # adjust if build_custom_cpi is in a different module
@@ -425,4 +425,48 @@ def student_base_cpi(weights_version="table1", area_code="0000"):
         weights_version=weights_version,
         area_code=area_code
     )
+
+
+
+def senior_base_cpi(weights_version="table1", area_code="0000"):
+    senior_basket = {
+        "SEAA": 0.35,   # Rent of primary residence
+        "SEFC": 0.25,   # Food at home
+        "SEHF": 0.15,   # Medical care services
+        "SEME": 0.10,   # Prescription drugs
+        "SEGD": 0.05,   # Household utilities
+        "SETA": 0.05,   # Public transportation
+        "SERA": 0.05    # Apparel
+    }
+    return build_custom_cpi(basket=senior_basket, weights_version=weights_version, area_code=area_code)
+
+
+
+
+def urban_low_income_cpi(weights_version="table1", area_code="0000"):
+    uli_basket = {
+        "SEAA": 0.40,   # Rent
+        "SEFC": 0.25,   # Food at home
+        "SEGD": 0.10,   # Household utilities
+        "SETA": 0.10,   # Public transportation
+        "SEFV": 0.05,   # Food away from home
+        "SEAP": 0.05,   # Personal care
+        "SERA": 0.05    # Apparel
+    }
+    return build_custom_cpi(basket=uli_basket, weights_version=weights_version, area_code=area_code)
+
+
+
+
+def young_professional_cpi(weights_version="table1", area_code="0000"):
+    yp_basket = {
+        "SEAA": 0.30,   # Rent
+        "SEFV": 0.20,   # Food away from home
+        "SETA": 0.10,   # Public transportation
+        "SEGD": 0.10,   # Utilities
+        "SECP": 0.10,   # Recreation
+        "SS4501": 0.10, # Personal computers
+        "SERA": 0.10    # Apparel
+    }
+    return build_custom_cpi(basket=yp_basket, weights_version=weights_version, area_code=area_code)
 
