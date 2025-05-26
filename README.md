@@ -152,6 +152,7 @@ FlexCPI/
 | `match_series_ids_to_weights()` | Fuzzy match series IDs to weighted categories |
 | `assign_manual_weights()` | Manually assign weights to selected CPI series |
 | `fetch_cpi_series_data()` | Fetch monthly CPI values from BLS API |
+| `student_base_cpi()` | Generate a ready-to-use CPI index for a typical student consumption basket |
 | `compute_custom_cpi_index()` | Compute CPI index using matched or manual weights |
 | `compute_inflation_rate()` | Calculate year-over-year inflation from CPI index |
 | `fetch_actual_cpi_series()` | Fetch official CPI series from BLS for comparison |
@@ -251,6 +252,22 @@ FlexCPI/
 - **Outputs:** `DataFrame` with year, month, value, series_id
 
 - **Description:** Retrieves time series CPI values from the BLS API.
+
+---
+
+### `student_base_cpi()`
+- **Inputs:**  
+  - `weights_version` *(str, optional)*: `"table1"` (default) or `"table2"`  
+  - `area_code` *(str, optional)*: BLS area code, default is `"0000"` (U.S. city average)
+
+- **Outputs:**  
+  - `DataFrame` of monthly CPI index values for a representative student consumption basket
+
+- **Description:**  
+  Generates a ready-to-use custom CPI for a predefined student basket, including rent, food, transit, tuition, and electronics.  
+  Uses `build_custom_cpi()` internally with hardcoded weights and common BLS item codes reflecting student spending patterns.
+
+
 
 ---
 
