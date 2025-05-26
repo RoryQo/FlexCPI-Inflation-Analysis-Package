@@ -141,7 +141,16 @@ FlexCPI/
 
 ---
 
-## Core Functions
+## Core Functions and Custom Baskets
+
+
+> **Important:**  
+> Before using most functions in `flexcpi`, you must first load the necessary data tables:
+> Reference Requirements for code instructions
+>
+> - These data tables are required inputs for key operations like matching series to weights and computing custom CPI indexes.
+
+
 
 | Function | Purpose |
 |---------|---------|
@@ -162,11 +171,18 @@ FlexCPI/
 | `forecast_custom_cpi()` | Fit ARIMA model to custom CPI index and forecast future values |
 
 
-> **Important:**  
-> Before using most functions in `flexcpi`, you must first load the necessary data tables:
-> Reference Requirements for code instructions
->
-> - These data tables are required inputs for key operations like matching series to weights and computing custom CPI indexes.
+
+
+### Predefined Custom CPI Baskets
+
+| Function Name              | Target Group               | Key Features                                                            |
+|---------------------------|----------------------------|-------------------------------------------------------------------------|
+| `student_base_cpi()`       | Students (college/university) | Focus on rent, food, tuition, public transit, and computers             |
+| `senior_base_cpi()`        | Retirees / Older adults     | Emphasizes housing, food at home, and medical care                      |
+| `urban_low_income_cpi()`   | Low-income urban households | High weight on rent, food at home, and public transit                   |
+| `young_professional_cpi()` | Early-career professionals  | Balanced mix of rent, dining out, computers, and transportation         |
+
+
 ---
 
 ## Function Inputs/Outputs
@@ -252,20 +268,6 @@ FlexCPI/
 - **Outputs:** `DataFrame` with year, month, value, series_id
 
 - **Description:** Retrieves time series CPI values from the BLS API.
-
----
-
-### `student_base_cpi()`
-- **Inputs:**  
-  - `weights_version` *(str, optional)*: `"table1"` (default) or `"table2"`  
-  - `area_code` *(str, optional)*: BLS area code, default is `"0000"` (U.S. city average)
-
-- **Outputs:**  
-  - `DataFrame` of monthly CPI index values for a representative student consumption basket
-
-- **Description:**  
-  Generates a ready-to-use custom CPI for a predefined student basket, including rent, food, transit, tuition, and electronics.  
-  Uses `build_custom_cpi()` internally with hardcoded weights and common BLS item codes reflecting student spending patterns.
 
 
 
@@ -377,6 +379,69 @@ Forecasts future values of a computed custom CPI index using ARIMA modeling.
 - Automatically extends the time series into the future and appends the forecasted CPI values.
 - Optionally generates a line plot showing historical and projected CPI index.
 
+
+
+---
+
+## Predefined CPI Input/Output
+
+### `student_base_cpi()`
+- **Inputs:**  
+  - `weights_version` *(str, optional)*: `"table1"` (default) or `"table2"`  
+  - `area_code` *(str, optional)*: BLS area code, default is `"0000"` (U.S. city average)
+
+- **Outputs:**  
+  - `DataFrame` of monthly CPI index values for a representative student consumption basket
+
+- **Description:**  
+  Generates a ready-to-use custom CPI for a predefined student basket, including rent, food, transit, tuition, and electronics.  
+  Uses `build_custom_cpi()` internally with hardcoded weights and common BLS item codes reflecting student spending patterns.
+
+
+---
+
+
+### `senior_base_cpi()`
+- **Inputs:**  
+  - `weights_version` *(str, optional)*: `"table1"` (default) or `"table2"`  
+  - `area_code` *(str, optional)*: BLS area code, default is `"0000"` (U.S. city average)
+
+- **Outputs:**  
+  - `DataFrame` of monthly CPI index for a typical senior household
+
+- **Description:**  
+  Constructs a CPI index emphasizing housing, food at home, medical care, and utilities—reflecting consumption priorities of older adults. Built using `build_custom_cpi()` with fixed item weights.
+
+
+---
+
+### `urban_low_income_cpi()`
+- **Inputs:**  
+  - `weights_version` *(str, optional)*: `"table1"` (default) or `"table2"`  
+  - `area_code` *(str, optional)*: BLS area code, default is `"0000"` (U.S. city average)
+
+- **Outputs:**  
+  - `DataFrame` of monthly CPI index values for a low-income urban household
+
+- **Description:**  
+  Estimates inflation for low-income renters in urban areas.  
+  Heavy emphasis on rent, food at home, and public transportation.  
+  Supports geographic customization using BLS area codes.
+
+---
+
+
+### `young_professional_cpi()`
+- **Inputs:**  
+  - `weights_version` *(str, optional)*: `"table1"` (default) or `"table2"`  
+  - `area_code` *(str, optional)*: BLS area code, default is `"0000"` (U.S. city average)
+
+- **Outputs:**  
+  - `DataFrame` of monthly CPI index values for a young professional’s basket
+
+- **Description:**  
+  Simulates inflation exposure for early-career professionals.  
+  Includes rent, dining out, technology, and public transit as major components.
 
 ---
 
