@@ -384,3 +384,26 @@ def forecast_custom_cpi(custom_cpi_df, forecast_periods=12, order=(1,1,1), plot=
 
     return combined_df
 
+# === student cpi ===
+
+def student_base_cpi(weights_version="table1", area_code="0000"):
+    """
+    Returns a custom CPI for a typical student consumption basket.
+
+    Parameters:
+    - weights_version: str, either "table1" (U.S. city average) or "table2" (regional)
+    - area_code: str, BLS area code (default is '0000' = U.S. city average)
+
+    Returns:
+    - pandas.DataFrame: Monthly CPI index values for the student basket
+    """
+    # Define a simplified student basket by BLS item codes and assumed weights
+    student_basket = {
+        "SEAA": 0.25,  # Rent of primary residence
+        "SEFV": 0.15,  # Food away from home
+        "SEFC": 0.20,  # Food at home
+        "SETA": 0.10,  # Public transportation
+        "SS01": 0.10,  # Tuition, other school fees
+        "SS4501": 0.10,  # Personal computers
+        "SERA": 0.10,  # Apparel
+    }
