@@ -10,5 +10,6 @@ from .toolkit import (
     plot_inflation_comparison,
     auto_select_series,
     export_cpi_data,
-    forecast_custom_cpi
+    forecast_custom_cpi,
+    student_base_cpi
 )
