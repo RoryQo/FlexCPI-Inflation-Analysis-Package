@@ -26,7 +26,12 @@ nocite: |
 
 # Summary
 
-FlexCPI is a Python package available on PyPI that analyzes time-series data and streamlines exploratory time-series analysis with The Federal Reserve Economic Data (FRED) by automating routine tasks, including stationarity testing, grid searching for optimal ARIMA and SARIMA models, assessing the ARIMA and SARIMA model fit, and quick forecasting. This package includes automated model stability checks and model selection, along with Jupyter-optimized outputs, ensuring its rigor and efficiency for exploratory analyses in macroeconomic research.
+FlexCPI is a Python package that allows users to build and analyze custom price indices using Bureau of Labor Statistics (BLS) data. It enables the construction of custom price indices by offering keyword-based series search, series data extraction via the BLS API, series matching to official expenditure weights or manual weight assignment, along with index and year-over-year inflation computation over any period for maximum flexibility. To ensure index validity, the package includes a function to normalize the weights to sum to one.
+
+FlexCPI also includes functions that support the analysis of the computed price indices for easy plotting price indices trends, integrated options to compare with official benchmarks, and simple forecasting using ARIMA models.
+
+Additionally, the package includes several predefined consumption baskets built from simple approximations of weights and series from the BLS Consumer Expenditure Survey (full predefined baskets are viewable in the GitHub repository). These predefined baskets are designed to be directly compatible with all the analysis functions included in the package and ready for comparative analysis.
+
 
 # Statement of need
 
