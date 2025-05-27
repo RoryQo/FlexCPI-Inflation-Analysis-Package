@@ -35,7 +35,12 @@ Additionally, the package includes several predefined consumption baskets built 
 
 # Statement of need
 
-Time-series analyses are fundamental to macroeconomic research. FRED provides publicly available macroeconomic indicator data. While current packages, such as StatsModels, contain time-series analysis functions, and the Fredapi package allows users to download and import data from FRED easily, the FredQuincast package goes a step further by integrating and automating the two components. By streamlining exploratory time-series tasks, such as stationarity testing, model selection, and basic forecasting, this package helps macroeconomic researchers save time on routine tasks and enhance workflow reproducibility.
+Economists, and researchers can use tailored CPI baskets for specific populations, or geographies to inform policy decisions, conduct specialized economic analyses, and evaluate marginal effects. While CPI is a widely used macroeconomic indicator, existing tools for CPI analysis are limited to fetching national-level inflation indices or require extensive manual effort to build custom indexes via available APIs. 
+
+FlexCPI offers a dedicated Python package for constructing and analyzing custom CPI indexes. It simplifies the process of selecting relevant series and weights, to create custom indices, and compare these inflation trends to official CPI series. Built-in demographic baskets (e.g., student, senior, low-income) make it easy to get started, while the underlying API and data structure allow full customization. 
+
+No equivalent open-source tool currently exists with this level of flexibility and integration with the BLS CPI catalog and API. FlexCPI therefore provides a critical resource for those seeking greater precision and transparency in inflation measurement.
+
 
 # Acknowledgments
 
