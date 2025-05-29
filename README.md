@@ -4,6 +4,7 @@
   <a href="https://pypi.org/project/flexcpi/">
     <img src="https://img.shields.io/pypi/v/flexcpi?label=PyPI&logo=pypi&logoColor=white&labelColor=grey&color=brightgreen" alt="PyPI package">
   </a>
+ <a href="https://joss.theoj.org/papers/80b54d8460d01e03ddc7a240936b3f1a"><img src="https://joss.theoj.org/papers/80b54d8460d01e03ddc7a240936b3f1a/status.svg"></a>
 </p>
 
 <p align="center">
